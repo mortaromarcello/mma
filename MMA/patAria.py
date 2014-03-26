@@ -243,22 +243,14 @@ class Aria(PC):
             # output
 
             if not self.harmonyOnly[sc]:
-                self.sendNote(
-                    p.offset,
-                    self.getDur(p.duration),
-                    self.adjustNote(note),
-                    self.adjustVolume(p.vol, p.offset))
+                notelist = [(note,  p.vol)]
+            else:
+                notelist = []
 
             if self.harmony[sc]:
-                h = MMA.harmony.harmonize(self.harmony[sc], note, ct.chord.noteList)
-                
-                strumOffset = self.getStrum(sc)
+                h =  MMA.harmony.harmonize(self.harmony[sc], note, ct.chord.noteList)
+                harmlist = zip(h, [p.vol * self.harmonyVolume[sc]] * len(h))
+            else:
+                harmlist = []
 
-                for n in h:
-                    self.sendNote(
-                        p.offset + strumOffset,
-                        self.getDur(p.duration),
-                        self.adjustNote(n),
-                        self.adjustVolume(p.vol * self.harmonyVolume[sc], -1))
-
-                    strumOffset += self.getStrum(sc)
+            self.sendChord( notelist + harmlist, p.duration, p.offset)

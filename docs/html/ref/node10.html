@@ -28,21 +28,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <BODY  bgcolor="#ffffff">
 
 <DIV CLASS="navigation"><!--Navigation Panel-->
-<A NAME="tex2html573"
+<A NAME="tex2html574"
   HREF="node11.html">
 <IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
-<A NAME="tex2html571"
+<A NAME="tex2html572"
   HREF="mma.html">
 <IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
-<A NAME="tex2html565"
+<A NAME="tex2html566"
   HREF="node9.html">
 <IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
 <BR>
-<B> Next:</B> <A NAME="tex2html574"
+<B> Next:</B> <A NAME="tex2html575"
   HREF="node11.html">Emulating plucked instruments: Plectrum</A>
-<B> Up:</B> <A NAME="tex2html572"
+<B> Up:</B> <A NAME="tex2html573"
   HREF="mma.html">Reference Manual</A>
-<B> Previous:</B> <A NAME="tex2html566"
+<B> Previous:</B> <A NAME="tex2html567"
   HREF="node9.html">Lyrics</A>
 <BR>
 <BR></DIV>
@@ -51,32 +51,32 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL CLASS="ChildLinks">
-<LI><A NAME="tex2html575"
+<LI><A NAME="tex2html576"
   HREF="node10.html#SECTION001010000000000000000">Note Data Format</A>
 <UL>
-<LI><A NAME="tex2html576"
-  HREF="node10.html#SECTION001011000000000000000">Chord Extensions</A>
 <LI><A NAME="tex2html577"
-  HREF="node10.html#SECTION001012000000000000000">Accents</A>
+  HREF="node10.html#SECTION001011000000000000000">Chord Extensions</A>
 <LI><A NAME="tex2html578"
-  HREF="node10.html#SECTION001013000000000000000">Long Notes</A>
+  HREF="node10.html#SECTION001012000000000000000">Accents</A>
 <LI><A NAME="tex2html579"
-  HREF="node10.html#SECTION001014000000000000000">Using Defaults</A>
+  HREF="node10.html#SECTION001013000000000000000">Long Notes</A>
 <LI><A NAME="tex2html580"
-  HREF="node10.html#SECTION001015000000000000000">Stretch</A>
+  HREF="node10.html#SECTION001014000000000000000">Using Defaults</A>
 <LI><A NAME="tex2html581"
+  HREF="node10.html#SECTION001015000000000000000">Stretch</A>
+<LI><A NAME="tex2html582"
   HREF="node10.html#SECTION001016000000000000000">Other Commands</A>
 </UL>
 <BR>
-<LI><A NAME="tex2html582"
-  HREF="node10.html#SECTION001020000000000000000">AutoSoloTracks</A>
 <LI><A NAME="tex2html583"
-  HREF="node10.html#SECTION001030000000000000000">Drum Solo Tracks</A>
+  HREF="node10.html#SECTION001020000000000000000">AutoSoloTracks</A>
 <LI><A NAME="tex2html584"
-  HREF="node10.html#SECTION001040000000000000000">Arpeggiation</A>
+  HREF="node10.html#SECTION001030000000000000000">Drum Solo Tracks</A>
 <LI><A NAME="tex2html585"
-  HREF="node10.html#SECTION001050000000000000000">Sequence</A>
+  HREF="node10.html#SECTION001040000000000000000">Arpeggiation</A>
 <LI><A NAME="tex2html586"
+  HREF="node10.html#SECTION001050000000000000000">Sequence</A>
+<LI><A NAME="tex2html587"
   HREF="node10.html#SECTION001060000000000000000">Voicing</A>
 </UL>
 <!--End of Table of Child-Links-->
@@ -266,7 +266,7 @@ The notes in a S<SMALL>OLO</SMALL> or M<SMALL>ELODY</SMALL> track are specified 
 series of ``chords''. Each chord can be a single note, or several
 notes (all with the same duration). Each chord in the bar is delimited
 with a single semicolon.<A NAME="tex2html44"
-  HREF="#foot5059"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A> Please note
+  HREF="#foot5061"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A> Please note
 the terminology used here! When we refer to a ``chord'' we are
 referring to the data a one point in the bar. It might be a single
 note, a number of notes, or a rest.
@@ -501,7 +501,7 @@ The G<SMALL>RACE</SMALL> extension can, optionally, have a ``offset
   grace note; the duration of the note is divided by the modifier. So,
   a 16th grace note would be played 24 MIDI ticks
   early.<A NAME="tex2html46"
-  HREF="#foot5065"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A> If
+  HREF="#foot5067"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A> If
   you have multiple grace notes you can use increasing offset
   modifiers to stretch out the grace notes. For example, to sound
   three grace notes you could do:
@@ -583,7 +583,7 @@ For those who ``need to know'', here's how the note duration is
 
 <P>
 </LI>
-<LI>In addition, a R<SMALL>TIME</SMALL> setting can add or subtract
+<LI>In addition, a RD<SMALL>URATION</SMALL> setting can add or subtract
     additional ticks to the note.
   
 </LI>
@@ -675,7 +675,7 @@ Individual notes or chords can have accents. Unfortunately, in
 <FONT Face="Serif"  Color="Navy"><I>MMA</I></FONT> 's text format, we can't use a notation which places the accent
 over the note, like sheet music does ... so we need a slightly
 different method. In a S<SMALL>OLO</SMALL> or M<SMALL>ELODY</SMALL> line you can have
-any of the characters ``!'', ``-'', ``&#710;'' or ``&amp;'' between the
+any of the characters ``!'', ``-'', ``ˆ'' or ``&amp;'' between the
 duration and pitch. All the accents much be in one chunk, without
 additional characters or spaces.
 
@@ -696,7 +696,7 @@ their effect:
 
 <P>
 </DD>
-<DT><STRONG>&#710;</STRONG></DT>
+<DT><STRONG>ˆ</STRONG></DT>
 <DD>Accent: Make the following note louder.
   
 </DD>
@@ -710,7 +710,7 @@ their effect:
 <P>
 You can use any number of these accents in a set (however, more than 5
 becomes useless). Their effects are cummulative.<A NAME="tex2html47"
-  HREF="#foot4905"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">3</SPAN></SUP></A>
+  HREF="#foot4907"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">3</SPAN></SUP></A>
 <P>
 And example of the usage might be:
 
@@ -718,7 +718,7 @@ And example of the usage might be:
 
       <Table Hspace="40%" CellSpacing=0 CellPadding=10 BGColor="OldLace" Border=3>
         <tr><td>
-    <B>Solo Riff 4a; !&#710; c; !!d; e;   </B> 
+    <B>Solo Riff 4a; !ˆ c; !!d; e;   </B> 
    
 	    </td></tr>
       </Table>
@@ -1311,7 +1311,7 @@ Voicing</A>
 <P>
 These V<SMALL>OICING</SMALL> commands only apply to M<SMALL>ELODY</SMALL> and
 S<SMALL>OLO</SMALL> tracks.<A NAME="tex2html48"
-  HREF="#foot5074"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">4</SPAN></SUP></A> Each option is set
+  HREF="#foot5076"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">4</SPAN></SUP></A> Each option is set
 as an OPTION=VALUE pair.
 
 <P>
@@ -1379,7 +1379,7 @@ generate a warning.
 <P>
 <BR><HR><H4>Footnotes</H4>
 <DL>
-<DT><A NAME="foot5059">... semicolon.</A><A
+<DT><A NAME="foot5061">... semicolon.</A><A
  HREF="node10.html#tex2html44"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A></DT>
 <DD>I have borrowed heavily from the
   notation program MUP for the syntax used here. For notation I highly
@@ -1389,20 +1389,20 @@ generate a warning.
   HREF="http://www.Arkkra.com/">http://www.Arkkra.com/</A></TT>.
 
 </DD>
-<DT><A NAME="foot5065">... early.</A><A
+<DT><A NAME="foot5067">... early.</A><A
  HREF="node10.html#tex2html46"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A></DT>
 <DD>Using 
 <FONT Face="Serif"  Color="Navy"><I>MMA</I></FONT> 's 192 ticks for a quarter note, a 16th
     note gets 48 ticks. Divide that by the modifier (default is 2.
 
 </DD>
-<DT><A NAME="foot4905">... cummulative.</A><A
+<DT><A NAME="foot4907">... cummulative.</A><A
  HREF="node10.html#tex2html47"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">3</SPAN></SUP></A></DT>
 <DD>Each accent
   character changes the note articulation or volume by 20%.
 
 </DD>
-<DT><A NAME="foot5074">... tracks.</A><A
+<DT><A NAME="foot5076">... tracks.</A><A
  HREF="node10.html#tex2html48"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">4</SPAN></SUP></A></DT>
 <DD>For other voicing options, please see
   <A HREF="node14.html#chord-voicing">here</A>.
@@ -1411,26 +1411,26 @@ generate a warning.
 </DL>
 <DIV CLASS="navigation"><HR>
 <!--Navigation Panel-->
-<A NAME="tex2html573"
+<A NAME="tex2html574"
   HREF="node11.html">
 <IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
-<A NAME="tex2html571"
+<A NAME="tex2html572"
   HREF="mma.html">
 <IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
-<A NAME="tex2html565"
+<A NAME="tex2html566"
   HREF="node9.html">
 <IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
 <BR>
-<B> Next:</B> <A NAME="tex2html574"
+<B> Next:</B> <A NAME="tex2html575"
   HREF="node11.html">Emulating plucked instruments: Plectrum</A>
-<B> Up:</B> <A NAME="tex2html572"
+<B> Up:</B> <A NAME="tex2html573"
   HREF="mma.html">Reference Manual</A>
-<B> Previous:</B> <A NAME="tex2html566"
+<B> Previous:</B> <A NAME="tex2html567"
   HREF="node9.html">Lyrics</A></DIV>
 <!--End of Navigation Panel-->
 <ADDRESS>
 Bob van der Poel
-2013-09-06
+2013-12-21
 </ADDRESS>
 </BODY>
 </HTML>

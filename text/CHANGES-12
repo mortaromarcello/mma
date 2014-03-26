@@ -241,3 +241,14 @@ Minor change go get stdin (and -g option) to actually work.
 
 September 6, 2013
 Released 12.10d
+
+---------------------------
+
+Added RDURATION command. This is the same format as the other "R" commands. See manual.
+
+Normally groove additions aren't listed here, but the new "none.mma" file
+ is noteworthy. It's the simplist groove ever written, but is useful when
+ you want to turn off all the stuff you have.
+
+December 21, 2013
+Released 13.12

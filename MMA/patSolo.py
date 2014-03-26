@@ -698,6 +698,8 @@ class Melody(PC):
                 self.trackArp(nn, offset)
                 continue
 
+            dur = None  # default duration for notes in chord
+
             for nev in nn:
                 n = nev.pitch
                 if n == None:     # skip rests
@@ -710,9 +712,13 @@ class Melody(PC):
                     off = int(offset - (nev.duration/nev.isgrace))
                 else:
                     off = offset + strumOffset
-                self.sendNote(off, 
-                       self.getDur(int(nev.duration * nev.articulation)),
-                       n, int(nev.velocity))
+                
+                # Set duration for this chord. Only do it once so they are
+                # all the same length. The call to getDur() adjust for RDURATION.
+                if dur == None:
+                    dur = self.getDur(int(nev.duration * nev.articulation))
+
+                self.sendNote(off, dur, n, int(nev.velocity))
                 strumOffset += self.getStrum(sc)
 
 

@@ -28,21 +28,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <BODY  bgcolor="#ffffff">
 
 <DIV CLASS="navigation"><!--Navigation Panel-->
-<A NAME="tex2html619"
+<A NAME="tex2html620"
   HREF="node14.html">
 <IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
-<A NAME="tex2html617"
+<A NAME="tex2html618"
   HREF="mma.html">
 <IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
-<A NAME="tex2html611"
+<A NAME="tex2html612"
   HREF="node12.html">
 <IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
 <BR>
-<B> Next:</B> <A NAME="tex2html620"
+<B> Next:</B> <A NAME="tex2html621"
   HREF="node14.html">Chord Voicing</A>
-<B> Up:</B> <A NAME="tex2html618"
+<B> Up:</B> <A NAME="tex2html619"
   HREF="mma.html">Reference Manual</A>
-<B> Previous:</B> <A NAME="tex2html612"
+<B> Previous:</B> <A NAME="tex2html613"
   HREF="node12.html">Automatic Melodies: Aria Tracks</A>
 <BR>
 <BR></DIV>
@@ -51,14 +51,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL CLASS="ChildLinks">
-<LI><A NAME="tex2html621"
-  HREF="node13.html#SECTION001310000000000000000">RndSeed</A>
 <LI><A NAME="tex2html622"
-  HREF="node13.html#SECTION001320000000000000000">RSkip</A>
+  HREF="node13.html#SECTION001310000000000000000">RndSeed</A>
 <LI><A NAME="tex2html623"
-  HREF="node13.html#SECTION001330000000000000000">RTime</A>
+  HREF="node13.html#SECTION001320000000000000000">RSkip</A>
 <LI><A NAME="tex2html624"
-  HREF="node13.html#SECTION001340000000000000000">Other Randomizing Commands</A>
+  HREF="node13.html#SECTION001330000000000000000">RTime</A>
+<LI><A NAME="tex2html625"
+  HREF="node13.html#SECTION001340000000000000000">RDuration</A>
+<LI><A NAME="tex2html626"
+  HREF="node13.html#SECTION001350000000000000000">Other Randomizing Commands</A>
 </UL>
 <!--End of Table of Child-Links-->
 <HR>
@@ -284,12 +286,132 @@ points. In the above example the adjustments would be in the range 0 to
 10, -10 to 0, -10 to 20 and -8 to 8.
 
 <P>
-R<SMALL>TIME</SMALL> is guaranteed never to start a note before the start of a
-bar.
+Notes:
 
 <P>
 
-<H1><A NAME="SECTION001340000000000000000">
+<UL>
+<LI>R<SMALL>TIME</SMALL> is guaranteed never to start a note before the start of a
+bar.
+
+<P>
+</LI>
+<LI>R<SMALL>TIME</SMALL> is applied to every note in a chord. This means
+that if you have a chord (either from a C<SMALL>HORD</SMALL> track or as a
+result of a H<SMALL>ARMONY</SMALL> setting) each note can start at different
+point. This probably makes sense since no musician will ever hit a
+number of keys on a piano or strings on a guitar at the same instant;
+nor can two trumpet players ever start a note at the same <SPAN  CLASS="textit">exact</SPAN>
+time. The point of R<SMALL>TIME</SMALL> is to humanize events a little bit by
+moving the ``hit'' points. Please note the difference in how this
+command works versus the R<SMALL>DURATION</SMALL> command, below.
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H1><A NAME="SECTION001340000000000000000"></A> <A NAME="rduration"></A>
+<BR>
+RDuration
+</H1> 
+
+<P>
+In a similar manner that the RT<SMALL>IME</SMALL> command, discussed above, sets the start
+point for a note, this command adjusts the duration of a note.
+
+<P>
+The RD<SMALL>URATION</SMALL> argument is a percentage value by which a duration is
+adjusted. A setting of 0 disables the adjustment for a track (this is
+the default). In its simplest usage:
+
+<P>
+
+      <Table Hspace="40%" CellSpacing=0 CellPadding=10 BGColor="OldLace" Border=3>
+        <tr><td>
+    <B>Bass RDuration 10  </B> 
+   
+	    </td></tr>
+      </Table>
+
+<P>
+the command will adjust the duration of every note in a B<SMALL>ASS</SMALL>
+track plus or minus 10%. So, if the duration set starts off as 192
+MIDI ticks (a quarter note), the command can change it to anywhere
+between 182 and 202 ticks.
+
+<P>
+You can further fine-tune the RD<SMALL>URATION</SMALL> settings by using a minimum and
+maximum value in the form M<SMALL>INIMUM,</SMALL>M<SMALL>AXIMUM</SMALL>. Note the
+<SMALL>COMMA</SMALL>! For example:
+
+<P>
+
+      <Table Hspace="40%" CellSpacing=0 CellPadding=10 BGColor="OldLace" Border=3>
+        <tr><td>
+    <B>Chord RDuration 0,10 -10,0 -10,20  8  </B> 
+   
+	    </td></tr>
+      </Table>
+
+<P>
+Would set different minimum and maximum adjustment values for different sequence
+points. In the above example the adjustments would be in the range 0 to
+10, -10 to 0, -10 to 20 and -8 to 8.
+
+<P>
+Notes:
+
+<P>
+
+<UL>
+<LI>No generated value will generate a null duration. If the
+  randomized value is 0 or less, it will become 1 (tick).
+
+<P>
+</LI>
+<LI>It is quite possible to cause adjoining notes to overlap.
+  Generally, this is not a problem.
+
+<P>
+</LI>
+<LI>A different value can be used for each bar in a sequence:
+
+<P>
+
+      <Table Hspace="40%" CellSpacing=0 CellPadding=10 BGColor="OldLace" Border=3>
+        <tr><td>
+    <B>Scale RDuration 5,10 0 / 20  </B> 
+   
+	    </td></tr>
+      </Table>
+
+<P>
+</LI>
+<LI>A ``/'' can be used to repeat values.
+
+<P>
+</LI>
+<LI>The A<SMALL>RTICULATE</SMALL> setting is applied <SPAN  CLASS="textit">before</SPAN> the
+  randomization is done.
+
+<P>
+</LI>
+<LI>If the note being adjusted is part of a chord or a
+  H<SMALL>ARMONY</SMALL> event, all notes for that timestamp in the track will be
+  adjusted by the same value ... all notes (including
+  H<SMALL>ARMONY</SMALL> notes) will have the same duration. Please note the
+  difference in how this command works versus the R<SMALL>TIME</SMALL>
+  command, above.
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H1><A NAME="SECTION001350000000000000000">
 Other Randomizing Commands</A>
 </H1>
 
@@ -342,26 +464,26 @@ In addition to the above, the following commands should be examined:
 </DL>
 <DIV CLASS="navigation"><HR>
 <!--Navigation Panel-->
-<A NAME="tex2html619"
+<A NAME="tex2html620"
   HREF="node14.html">
 <IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
-<A NAME="tex2html617"
+<A NAME="tex2html618"
   HREF="mma.html">
 <IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
-<A NAME="tex2html611"
+<A NAME="tex2html612"
   HREF="node12.html">
 <IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
 <BR>
-<B> Next:</B> <A NAME="tex2html620"
+<B> Next:</B> <A NAME="tex2html621"
   HREF="node14.html">Chord Voicing</A>
-<B> Up:</B> <A NAME="tex2html618"
+<B> Up:</B> <A NAME="tex2html619"
   HREF="mma.html">Reference Manual</A>
-<B> Previous:</B> <A NAME="tex2html612"
+<B> Previous:</B> <A NAME="tex2html613"
   HREF="node12.html">Automatic Melodies: Aria Tracks</A></DIV>
 <!--End of Navigation Panel-->
 <ADDRESS>
 Bob van der Poel
-2013-09-06
+2013-12-21
 </ADDRESS>
 </BODY>
 </HTML>

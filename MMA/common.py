@@ -82,7 +82,7 @@ def warning(msg):
         if gbl.inpath:
             ln += "<File:%s>" % gbl.inpath.fname
 
-        print "Warning:%s\n" % ln
+        print "Warning:%s" % ln
         msg = msg.split('\n')
         for a in msg:
             print "       %s" % a

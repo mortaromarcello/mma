@@ -80,7 +80,7 @@ def getRndPair(l, trk, min, max):
         error("%s: expecting a value or value pair." % trk)
 
     if l.count(',')>1:
-        error("%s: Random pairs can only have one ','!" % trk)
+        error("%s: Random pairs can only have one ','." % trk)
 
     if l.count(',') == 1:
         n1, n2 = l.split(',')
@@ -579,7 +579,6 @@ class PC:
         msg = "%s Rvolume" % self.name
         ln = lnExpand(ln, msg)
         tmp = []
-
         for n in ln:
             n1, n2 = getRndPair(n, msg, -100, 100)
             tmp.append( [ n1/100. , n2/100. ] )
@@ -587,7 +586,6 @@ class PC:
         self.rVolume = seqBump(tmp)
 
         if gbl.debug:
-            print "%s:" % msg,
             for n1, n2 in self.rVolume:
                 n1 = int(n1 * 100)
                 n2 = int(n2 * 100)
@@ -648,6 +646,28 @@ class PC:
             print
 
 
+    def setRDuration(self, ln):
+        """ Set the duration randomizer for a track. """
+
+        msg = "%s RDuration" % self.name
+        ln = lnExpand(ln, msg)
+        tmp = []
+
+        for n in ln:
+            n1, n2 = getRndPair(n, msg, -100, 100)
+            tmp.append([n1/100., n2/100.])
+
+        self.rDuration = seqBump(tmp)
+
+        if gbl.debug:
+            print "%s:" % msg,
+            for n1, n2 in self.rDuration:
+                if abs(n1) == n2:
+                    print "%s " % (n2*100),
+                else:
+                    print "%s,%s " % (n1*100, n2*100),
+            print
+
     def setRTime(self, ln):
         """ Set the timing randomizer for a track. """
 
@@ -663,7 +683,7 @@ class PC:
 
         if gbl.debug:
             print "%s:" % msg,
-            for n1, n2 in self.rVolume:
+            for n1, n2 in self.rTime:
                 if abs(n1) == n2:
                     print "%s" % n2,
                 else:
@@ -859,6 +879,7 @@ class PC:
         self.rVolume       = seqBump(self.rVolume)
         self.rSkip         = seqBump(self.rSkip)
         self.rTime         = seqBump(self.rTime)
+        self.rDuration     = seqBump(self.rDuration)
         self.seqRndWeight  = seqBump(self.seqRndWeight)
         self.strum         = seqBump(self.strum)
         self.octave        = seqBump(self.octave)
@@ -1316,6 +1337,7 @@ class PC:
             'RSKIP':     self.rSkip[:],
             'RSKIPBEATS':self.rSkipBeats[:],
             'RTIME':     copy.deepcopy(self.rTime),
+            'RDURATION': copy.deepcopy(self.rDuration),
             'RVOLUME':   copy.deepcopy(self.rVolume),
             'SCALE':     self.scaleType[:],
             'SEQ':       self.sequence[:],
@@ -1352,6 +1374,7 @@ class PC:
         self.accent     =  g['ACCENT']
         self.autoPat    =  g['AUTOPAT']
         self.rTime      =  g['RTIME']
+        self.rDuration  =  g['RDURATION']
         self.rVolume    =  g['RVOLUME']
         self.rSkip      =  g['RSKIP']
         self.rSkipBeats =  g['RSKIPBEATS']
@@ -1414,6 +1437,7 @@ class PC:
             self.rSkip        =  [0]
             self.rSkipBeats   =  []
             self.rTime        =  [[0,0]]
+            self.rDuration    =  [[0,0]]
             self.octave       =  [4 * 12]
             if self.vtype=='DRUM':
                 self.voice    =  [defaultDrum]
@@ -2006,7 +2030,6 @@ class PC:
             a2 = int(v * self.rVolume[sc][1])
             if a1 or a2:
                 v += random.randrange(a1, a2)
-
         if v > 127:
             v = 127
         elif  v < 1:
@@ -2085,15 +2108,22 @@ class PC:
     def getDur(self, d):
         """ Return the adjusted duration for a note.
 
-            The adjustment makes notes longer or shorter. Valid
-            adjustments are 1 to 200.
+            Articulate and RDuration are used.
         """
 
-        d = (d * self.artic[self.seq]) / 100
-        if not d:
-            d = 1   # force a value if we end with 0.
+        sc = self.seq
 
-        return d
+        d = (d * self.artic[sc]) / 100
+
+        if self.rDuration[sc]:
+            a1 = int(d * self.rDuration[sc][0])
+            a2 = int(d * self.rDuration[sc][1])
+            if a1 or a2:
+                d += random.randrange(a1, a2)
+        if d <= 0:
+            d = 1   # force a value if we end with 0 or less.
+
+        return int(d)
 
 
     def sendNote( self, offset, duration, note, velocity):
@@ -2111,7 +2141,6 @@ class PC:
             ll = self.getDur(rptr)
             offs = 0
             vel = velocity
-
             for q in range(duration/rptr):
                 gbl.mtrks[self.channel].addPairToTrack(
                     offset + offs + self.delay[sc],
@@ -2141,13 +2170,15 @@ class PC:
 
     def sendChord(self, chord, duration, offset):
         """ Send a chord to midi with strum delay. Called
-            from Bass, Walk, Arpeggio and Scale.
+            from Chord, Bass, Walk, Arpeggio and Scale.
 
             chord = list of [note, volume]s
             p = pattern for current beat
 
             This compensates out the strum value so that the additional (harmony)
             notes all end at the same time.
+
+            Adjusts the RDURATION setting.
         """
 
         sc = self.seq
@@ -2159,10 +2190,12 @@ class PC:
 
         strumOffset = 0  # 1st note in list is not offset-strummed
 
+        duration = self.getDur(duration)
+
         for n, vol in chord:
             self.sendNote(
                 offset + strumOffset,
-                self.getDur(duration),
+                duration,
                 self.adjustNote(n),
                 self.adjustVolume(vol, offset))
 

@@ -299,6 +299,18 @@ class Macros:
             m += ' '.join([str(int(a * 100)) for a in t.rSkip])
             return m
 
+        elif func == 'RDURATION':
+            tmp = []
+            for a1, a2 in t.rDuration:
+                a1 = int(a1 * 100)
+                a2 = int(a2 * 100)
+                if a1 == a2:
+                    tmp.append('%s' % abs(a1))
+                else:
+                    tmp.append('%s,%s' % ( a1, a2))
+
+            return ' '. join(tmp)
+
         elif func == 'RTIME':
             tmp = []
             for a1, a2 in t.rTime:

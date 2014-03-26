@@ -224,7 +224,7 @@ def getNote(o, orig, scale, off):
     return nn
 
 
-def getDur(o, noteDur, ornamentDur):
+def getNOdur(o, noteDur, ornamentDur):
     """ Return an actual duration for the note and ornament. """
 
     return int(noteDur + (noteDur * o['pad'][0])), \
@@ -260,7 +260,7 @@ def doOrnament(self, nlist, scale, p):
         gnote = getNote(o, note, scale, 1)
         odur = int(p.duration * orn_duration)
         ndur = p.duration - odur
-        noteDur, ornamentDur = getDur(o, ndur, odur)
+        noteDur, ornamentDur = getNOdur(o, ndur, odur)
         ovol = int(nvol * orn_volume)
         self.sendChord( [[gnote, ovol]], ornamentDur, p.offset + orn_offset)
         self.sendChord( [[note,  nvol]], noteDur, p.offset + odur)
@@ -270,7 +270,7 @@ def doOrnament(self, nlist, scale, p):
         odur = int(p.duration * orn_duration)
         ndur = p.duration - odur
         ovol = int(nvol * orn_volume)
-        noteDur, ornamentDur = getDur(o, ndur, odur)
+        noteDur, ornamentDur = getNOdur(o, ndur, odur)
 
         self.sendChord( [[note,  nvol]], ornamentDur, p.offset)
         self.sendChord( [[gnote, ovol]], noteDur, p.offset + ndur + orn_offset )
@@ -279,7 +279,7 @@ def doOrnament(self, nlist, scale, p):
         tnote = getNote(o, note, scale, 1)
         odur   = int(p.duration * orn_duration)  
         ovol   = int(nvol * orn_volume)
-        noteDur, _ = getDur(o, odur, odur)
+        noteDur, _ = getNOdur(o, odur, odur)
         offset = p.offset
         count  = range(int((p.duration/odur)/2))  # number of pairs
         if not count:   # ensure at least 1 pair
@@ -293,7 +293,7 @@ def doOrnament(self, nlist, scale, p):
         onote = getNote(o, note, scale, 1 )
         odur  = int((p.duration * orn_duration)/2)
         ndur  = p.duration - odur - odur
-        noteDur, ornamentDur = getDur(o, ndur, odur)
+        noteDur, ornamentDur = getNOdur(o, ndur, odur)
         ovol  = int(nvol * orn_volume) 
         
         self.sendChord( [[note,  ovol]], ornamentDur, p.offset + orn_offset)
@@ -305,7 +305,7 @@ def doOrnament(self, nlist, scale, p):
         note2 = getNote(o, note, scale, -1)
         odur  = int((p.duration * orn_duration)/3)
         ndur  = p.duration - (odur * 3)
-        noteDur, ornamentDur = getDur(o, ndur, odur)
+        noteDur, ornamentDur = getNOdur(o, ndur, odur)
         ovol = int(nvol * orn_volume) 
 
         self.sendChord( [[note1, ovol]], ornamentDur, p.offset + orn_offset)
@@ -320,7 +320,7 @@ def doOrnament(self, nlist, scale, p):
 
         odur = int((p.duration * orn_duration)/3)
         ndur = p.duration - (odur * 3)
-        noteDur, ornamentDur = getDur(o, ndur, odur)
+        noteDur, ornamentDur = getNOdur(o, ndur, odur)
         ovol = int(nvol * orn_volume)
 
         self.sendChord( [[note,  nvol]], noteDur,  p.offset)

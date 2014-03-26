@@ -24,7 +24,7 @@ Bob van der Poel <bob@mellowood.ca>
 
 import os
 
-version = "12.10d"        # Version -- Sept 6/2013
+version = "13.12"        # Version -- December 21/2013
 
 """ A few globals are actually set in the calling stub, mma.py.This is
     done to make future ports and platform specific settings a bit easier.

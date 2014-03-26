@@ -1,13 +1,12 @@
 
-A stable release, version 12.10, of MMA--Musical MIDI Accompaniment
+A stable release, version 13.12, of MMA--Musical MIDI Accompaniment
 is available for downloading. In addition to a number of bug fixes
 and optimizations, MMA now features:
 
- - New voicing options.
-
- - Sequences in melody/solo tracks.
-
- - Many minor bug fixes and enhancements.
+ - A number of Solo/Melody enhancements
+ - Multiple user library paths are now supported
+ - MIDI enhancements
+ - Lots of minor enhancements and bug fixes
 
 Please read the file text/CHANGES-12 for a complete list of changes.
   

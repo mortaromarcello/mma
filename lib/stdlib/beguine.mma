@@ -243,6 +243,15 @@ Bass            Sequence  *  *  *  *     *   *   *  B1
 DefGroove BeguineIntro8    Expanded, 8 bar, version of our 4 bar introduction.
 
 
+// Add some sustained string intros
+Groove BeguineIntro
+Begin Chord-Sus
+  Groove    BeguineSus
+  Sequence  *  *  *  { 1 2+8 80 0 60 0}
+End
+
+DefGroove BeguineSusIntro   4 bar intro with sustained strings
+
 ///////////////////////////
 // Ending
 

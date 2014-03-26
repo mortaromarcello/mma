@@ -1103,7 +1103,6 @@ def trackRvolume(name, ln):
 
     if not ln:
         error ("Use: %s RVolume N [...]" % name)
-
     gbl.tnames[name].setRVolume(ln)
 
 def trackSwell(name, ln):
@@ -1148,6 +1147,14 @@ def trackMallet(name, ln):
 
     gbl.tnames[name].setMallet(ln)
 
+
+def trackRduration(name, ln):
+    """ Set random duration effect for specific track."""
+
+    if not ln:
+        error ("Use: %s Rduration N [...]" % name)
+
+    gbl.tnames[name].setRDuration(ln)
 
 def trackRtime(name, ln):
     """ Set random timing for specific track. """
@@ -1669,6 +1676,7 @@ trackFuncs={
     'TUNING':          trackPlectrumTuning,
     'CAPO':            trackPlectrumCapo,
     'RANGE':           trackRange,
+    'RDURATION':       trackRduration,
     'RESTART':         trackRestart,
     'RIFF':            trackRiff,
     'RSKIP':           trackRskip,
